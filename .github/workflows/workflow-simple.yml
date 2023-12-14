@@ -23,5 +23,6 @@ jobs:
 
       - name: check ocsp status
         run: |
-          cd repo-2469891
+          pwd
+          ls
           openssl ocsp -issuer DigiCertTLSHybridECCSHA3842020CA1-1.crt.pem -cert github.pem -url http://ocsp.digicert.com
