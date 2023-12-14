@@ -7,15 +7,20 @@ on:
 jobs:
   blank:
     runs-on: windows-latest
-    #runs-on: vnet-windows-8
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Check powershell
         shell: pwsh
         run: |
           $response = Invoke-WebRequest -Uri "https://api.github.com"
           $response.Content
+
       - name: Check curl
         run : |
           curl -v -I --connect-timeout 30 https://api.github.com
+
       - name: check ocsp status
+        run: |
           openssl ocsp -issuer DigiCertTLSHybridECCSHA3842020CA1-1.crt.pem -cert github.pem -url http://ocsp.digicert.com
