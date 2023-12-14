@@ -1,0 +1,21 @@
+name: the-power-workflow-simple-2469891
+on:
+  workflow_dispatch:
+  workflow_call:
+  repository_dispatch:
+    types: [custom_event_type]
+jobs:
+  blank:
+    runs-on: windows-latest
+    #runs-on: vnet-windows-8
+    steps:
+      - name: Check powershell
+        shell: pwsh
+        run: |
+          $response = Invoke-WebRequest -Uri "https://api.github.com"
+          $response.Content
+      - name: Check curl
+        run : |
+          curl -v -I --connect-timeout 30 https://api.github.com
+      - name: check ocsp status
+          openssl ocsp -issuer DigiCertTLSHybridECCSHA3842020CA1-1.crt.pem -cert github.pem -url http://ocsp.digicert.com
