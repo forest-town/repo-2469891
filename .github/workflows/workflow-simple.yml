@@ -17,6 +17,10 @@ jobs:
           $response = Invoke-WebRequest -Uri "https://api.github.com"
           $response.Content
 
+      - name: curl version
+        run : |
+          curl --version
+          
       - name: Check curl
         run : |
           curl -v -I --connect-timeout 30 https://api.github.com
